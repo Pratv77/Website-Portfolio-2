@@ -75,7 +75,7 @@ body, html {
 }
 
 .card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
 }
 
 .card::before,
