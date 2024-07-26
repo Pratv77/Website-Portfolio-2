@@ -47,7 +47,7 @@ body, html {
 
 /* 
 
-    Main Container
+    Root Container
 
 */
 
@@ -68,15 +68,39 @@ body, html {
 */
 
 .card {
-    background-color: #2a2a2a7a;
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.082);
+    border-radius: 8px;
     position: relative;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card::before,
+.card > .card-border {
+    background: radial-gradient(
+        800px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, 0.06),
+        transparent 40%
+    );
+    border-radius: inherit;
+    content: "";
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 500ms;
 }
 
 .card::before {
     background: radial-gradient(
         800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.06),
+        rgba(255, 255, 255, 0.075),
         transparent 40%
     );
     z-index: 3;
@@ -84,46 +108,33 @@ body, html {
 
 .card > .card-border {
     background: radial-gradient(
-        800px circle at var(--mouse-x) var(--mouse-y),
+        400px circle at var(--mouse-x) var(--mouse-y),
         rgba(255, 255, 255, 0.3),
         transparent 40%
     );
     z-index: 1;
 }
 
-.card::before,
-.card > .card-border {
-    height: 100%;
-    width: 100%;
-    left: 0px;
-    top: 0px;
-    position: absolute;
-    content: "";
-    border-radius: inherit;
-    z-index: 2;
-    opacity: 0;
-    transition: opacity 500ms;
-    background: radial-gradient(
-        800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.06),
-        transparent 40%
-    );
-}
-/* 3:49 */
-.card > .card-content {
-    position: relative;
-    height: calc(100% - 2px);
-    width: calc(100% - 2px);
-    background-color: var(--card-color);
-    border-radius: inherit;
-    margin: 1px;
-    z-index: 2;
-}
-
-.card:hover::before {
+.card:hover::before,
+.card:hover > .card-border{
     opacity: 1;
 }
 
+.card > .card-content {
+    background-color: var(--card-color);
+    height: calc(100% - 2px);
+    width: calc(100% - 2px);
+    border-radius: inherit;
+    margin: 1px;
+    z-index: 2;
+    position: relative;
+}
+
+/* 
+
+    Card Positioning
+
+*/
 
 .card:nth-child(1) {
     grid-column: 1 / 5;
