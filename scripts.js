@@ -33,3 +33,30 @@ const handleOnMouseMove = e => {
 for(const card of document.querySelectorAll(".card")) {
     card.onmousemove = e => handleOnMouseMove(e);
 }
+
+// Card Expansion
+
+const container = document.querySelector('.container');
+const cards = document.querySelectorAll('.card');
+
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        if (!card.classList.contains('expanded')) {
+            // Expand the card
+            card.classList.add('expanded');
+            container.classList.add('card-expanded');
+            cards.forEach(otherCard => {
+                if (otherCard !== card) {
+                    otherCard.classList.add('hidden');
+                }
+            });
+        } else {
+            // Collapse the card
+            card.classList.remove('expanded');
+            container.classList.remove('card-expanded');
+            cards.forEach(otherCard => {
+                otherCard.classList.remove('hidden');
+            });
+        }
+    });
+});
